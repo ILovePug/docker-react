@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run qianweng/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "qian-docker-react"
+  env: "QianDockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-576392300045" #s3 bucket
+  bucket_path: "qian-docker-react" #same as app name
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
